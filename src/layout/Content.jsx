@@ -3,7 +3,7 @@ import CardItem from "../components/CardItem";
 import axios from "axios";
 import { useEffect } from "react";
 
-const Content = () => {
+const Content = ({ onToggleCart, selectedItems }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -29,7 +29,6 @@ const Content = () => {
 
     fetchProducts();
   }, []);
-  console.log(data);
 
   return (
     <div className="w-full  flex flex-wrap  justify-center items-start bg-gray-200 p-4 gap-5">
@@ -38,7 +37,9 @@ const Content = () => {
           key={index}
           title={item.categoryName}
           price={item.productCategoryID}
-          image={item.categoryDetail.categoryMainImage}
+          image={item.categoryDetail?.categoryMainImage || null}
+          onToggle={() => onToggleCart(item.productCategoryID)}
+          selected={selectedItems[item.productCategoryID]}
         />
       ))}
     </div>
