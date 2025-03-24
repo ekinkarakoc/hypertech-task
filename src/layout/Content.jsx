@@ -28,7 +28,6 @@ const Content = () => {
         );
         const products = response.data.data;
 
-        // Redux store'a gönder
         dispatch(setCardItems(products));
       } catch (error) {
         console.error("API Hatası:", error.response?.data || error.message);
@@ -39,7 +38,7 @@ const Content = () => {
   }, []);
 
   return (
-    <div className="w-full  flex flex-wrap  justify-center items-start bg-gray-200 p-4 gap-5">
+    <div className="w-full min-h-screen flex flex-wrap  justify-center items-start bg-gray-200 p-4 gap-5">
       {cardItems.map((item, index) => (
         <CardItem
           key={index}

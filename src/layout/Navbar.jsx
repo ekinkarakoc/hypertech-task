@@ -16,11 +16,9 @@ const Navbar = () => {
       <div className="flex gap-10 relative">
         <div className="relative">
           <FaShoppingBasket size={30} color="#455a64" />
-          {/* {cartCount > 0 && ( */}
           <span className="absolute -top-2.5 -right-3 bg-[#00bfa5] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
             {quantity}
           </span>
-          {/* )} */}
         </div>
         <CgProfile size={30} color="#455a64" />
       </div>
