@@ -18,7 +18,7 @@ const CardItem = ({ title, price, image, productCategoryID }) => {
 
   return (
     <div className="bg-white flex flex-col justify-between shadow-md h-80 rounded-lg p-4 m-2 w-full max-w-sm">
-      <div className="flex justify-center ">
+      <div className="flex justify-center h-30 ">
         <h2 className="text-lg font-semibold text-center w-70">{title}</h2>
       </div>
       <div className="flex justify-center">
