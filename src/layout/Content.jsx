@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import CardItem from "../components/CardItem";
 import axios from "axios";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCardItems } from "../control/cardSlice";
 
-const Content = ({ onToggleCart, selectedItems }) => {
-  const [data, setData] = useState([]);
+const Content = () => {
+  const dispatch = useDispatch();
+  const { cardItems } = useSelector((state) => state.card);
+
+  console.log(cardItems);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,7 +26,10 @@ const Content = ({ onToggleCart, selectedItems }) => {
             },
           }
         );
-        setData(response.data.data);
+        const products = response.data.data;
+
+        // Redux store'a gönder
+        dispatch(setCardItems(products));
       } catch (error) {
         console.error("API Hatası:", error.response?.data || error.message);
       }
@@ -32,14 +40,13 @@ const Content = ({ onToggleCart, selectedItems }) => {
 
   return (
     <div className="w-full  flex flex-wrap  justify-center items-start bg-gray-200 p-4 gap-5">
-      {data.map((item, index) => (
+      {cardItems.map((item, index) => (
         <CardItem
           key={index}
+          productCategoryID={item.productCategoryID}
           title={item.categoryName}
           price={item.productCategoryID}
-          image={item.categoryDetail?.categoryMainImage || null}
-          onToggle={() => onToggleCart(item.productCategoryID)}
-          selected={selectedItems[item.productCategoryID]}
+          image={item.categoryDetail.categoryMainImage || null}
         />
       ))}
     </div>

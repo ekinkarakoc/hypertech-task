@@ -1,8 +1,11 @@
 import React from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import { useSelector } from "react-redux";
 
-const Navbar = ({ cartCount }) => {
+const Navbar = () => {
+  const { quantity } = useSelector((store) => store.card);
+  console.log(quantity);
   return (
     <div className="w-full h-20 bg-gray-300 flex items-center justify-between px-10 sticky top-0 z-10">
       <img
@@ -15,7 +18,7 @@ const Navbar = ({ cartCount }) => {
           <FaShoppingBasket size={30} color="#455a64" />
           {/* {cartCount > 0 && ( */}
           <span className="absolute -top-2.5 -right-3 bg-[#00bfa5] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-            {cartCount}
+            {quantity}
           </span>
           {/* )} */}
         </div>
