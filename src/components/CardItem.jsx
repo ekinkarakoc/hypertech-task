@@ -12,14 +12,14 @@ const CardItem = ({ title, price, image, onToggle, selected }) => {
       <div className="w-full flex justify-center mt-4">
         <button
           onClick={onToggle}
-          className={`flex items-center justify-between w-50 px-2 py-2 border gap-2 rounded-2xl hover:cursor-pointer border-gray-400 
+          className={`flex items-center justify-between w-50 px-4 py-2 border gap-2 rounded-2xl hover:cursor-pointer border-gray-400 
                    hover:bg-gray-100 hover:scale-105 transition duration-300 ${
                      selected
-                       ? "bg-green-100 border-green-600"
+                       ? "bg-[#e0f2f1] border-green-600"
                        : "hover:bg-gray-100 border-gray-400"
                    }`}
         >
-          <p className="text-green-600 font-bold text-md">{price} ₺</p>
+          <p className="text-[#009688] font-bold text-md">{price} ₺</p>
           <p>{selected ? "Sepetten Çıkar" : "Sepete Ekle"}</p>
         </button>
       </div>
