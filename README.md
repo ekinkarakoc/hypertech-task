@@ -1,13 +1,74 @@
-# React + Vite
+# HYPERTECH FRONT-END CASE PROJE KURULUM ADIMLARI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1 -> npm create vite@latest hypertech-task komutu ile Vite kullanılarak proje kurulumu gerçekleştirildi.
 
-Currently, two official plugins are available:
+2 -> npm install tailwindcss @tailwindcss/vite komutu ile tailwind bağımlılıkları yüklendi, daha sonra aşağıdaki konfigurasyon ayarları vite.config.js dosyasına kaydedildi.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+        import { defineConfig } from "vite";
+        import react from "@vitejs/plugin-react";
+        import tailwindcss from "@tailwindcss/vite";
 
-## Expanding the ESLint configuration
+        export default defineConfig({
+        plugins: [react(), tailwindcss()],
+        });
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# hypertech-task
+3 -> Son olarak index.css dosyası içerisinde @import "tailwindcss"; importu kullanılarak tailwind classları projeye aktarıldı.
+
+4 -> layout klasörü oluşturuldu. İçerisinde 2 ana layout kısmı olan Navbar.jsx ve Content.jsx componentleri oluşturdu.
+
+5 -> Navbar.jsx componenti içerisinde sol tarafa logo, sağ tarafa sepetim ve user iconları koyuldu ve stillendirmeleri tailwind kullanılarak yapıldı. Iconlar için react-icons kullanıldı.
+
+6-> Content.jsx componenti içerisinde api'dan gelecek olan ürünleri listelemek için components klasörü içerisine CardItem.jsx componenti oluşturuldu.
+
+7 -> Deneme amaçlı bir object array oluşturuldu ve bu array map fonksiyonu kullanılarak içerisinde CardItem bileşeni render edildi. Daha sonra oluşturulan array içerisindeki header, image ve fiyat bilgileri props kullanılarak CardItem componentine gönderildi.
+
+8 -> Ürünleri ve sepetteki ürün sayısını tutmak amacıyla Redux Toolkit kurulumu yapılmasına karar verildi, bunun için store.js dosyası oluşturuldu. Store dosyasının içindeki store bileşeninin tüm uygulamayı kapsaması amacıyla main.jsx dosyasında Provider kullanıldı ve içerisine store bileşeni yerleştirildi.
+
+9 -> controls klasörü oluşturuldu ve içerisine cardSlice.js adında bir slice dosyası yerleştirildi.
+
+10 -> Slice ve initialState' ler cardSlice.js dosyasının içerisinde oluşturuldu ve cardSlice içerisindeki reducer store.js dosyasında import edilerek kullanıldı.
+
+11 -> Deneme amacıyla Navbar.jsx componentinde useSelector kullanılarak initialState içerisindeki quantity(Sepete Ekli Ürün Sayısı) değeri çekildi ve bir hata olmadığı görüldü.
+
+12 -> Api'dan çekeceğimiz verilerin redux içerisindeki initialState kısmına eklenmesi için cardSlice dosyası içerisinde setCardItems adında bir reducer oluşturuldu.
+
+        setCardItems: (state, action) => {
+            state.cardItems = action.payload.map((item) => ({
+                ...item,
+            }));
+        }
+
+13 -> Dökümantasyondaki API Postman üzerinde denendikten sonra Content.jsx componentinde axios kullanılarak çekildi ve response içerisindeki veriler incelendi.(Bearer Token için dökümantasyon içerisindeki siteye giriş yapıldı.)
+
+14 -> axios ve useEffect kullanılarak alınan veriler oluşturulan setCardItems' reducer fonksiyonu ve Dispatch kullanılarak initialState içerisine yerleştirildi.
+
+15 -> Api' dan gelen veriler initialState içerisine aktarıldıktan sonra Content.jsx componentinde useSelector' kullanılarak veriler tekrar çağırıldı. Verilerin içerisinden başlık fiyat ve görsel olarak kullanılacak kısımlar props aracılığı ile CardItem.jsx componentine aktarıldı.
+
+16 -> Sepete ekli olan ürün sayısını(quantity) artırıp azaltmak amacıyla cardSlice içerisine bir reducer daha yazıldı.
+
+        toggleCardItem: (state, action) => {
+            const itemId = action.payload;
+            const item = state.cardItems.find(
+                (item) => item.productCategoryID === itemId
+            );
+
+            if (item) {
+                item.selected = !item.selected;
+                state.quantity += item.selected ? 1 : -1;
+            }
+        }
+
+17 -> Hangi ürünün sepete ekli olduğunu takip etmek amacıyla setCardItem reducerı kullanılarak alınan değerlerin içerisine selected:false değişkeni koyuldu. Bu sayede sayfa ilk açıldığında hiçbir ürün sepette olmaması sağlandı.
+
+18 -> CardItem.jsx componenti içerisinde Sepete Ekle butonuna tıklandığı zaman ürünün sepete eklenmesi için toggleCardItem reducer fonksiyonu kullanıldı. Map ile döndüğümüz ürünün seçili olup olmadığını görmek için ise useSelector ile birlikte aşağıdaki fonksiyon kullanıldı.
+
+        const selected = useSelector(
+            (state) =>
+            state.card.cardItems.find(
+                (item) => item.productCategoryID === productCategoryID
+            )?.selected
+        );
+
+19 -> Sepete ekli olan ürün sayısı(quantity)' na useSelector kullanılarak Navbar.jsx componenti içerisinden erişildi ve Sepet iconunun sağ üst tarafında olacak şekilde konumlandırıldı.
+
+20 -> Responsive yapı için flexbox kullanıldı, index.html içerisinden title ve favicon değiştirildi ve proje tamamlandı.

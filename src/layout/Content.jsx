@@ -9,8 +9,6 @@ const Content = () => {
   const dispatch = useDispatch();
   const { cardItems } = useSelector((state) => state.card);
 
-  console.log(cardItems);
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {

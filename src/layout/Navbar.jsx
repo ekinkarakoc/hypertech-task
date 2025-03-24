@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const { quantity } = useSelector((store) => store.card);
-  console.log(quantity);
   return (
     <div className="w-full h-20 bg-gray-300 flex items-center justify-between px-10 sticky top-0 z-10">
       <img

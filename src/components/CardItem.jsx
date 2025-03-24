@@ -16,7 +16,6 @@ const CardItem = ({ title, price, image, productCategoryID }) => {
     dispatch(toggleCardItem(productCategoryID));
   };
 
-  console.log(selected);
   return (
     <div className="bg-white flex flex-col justify-between shadow-md h-80 rounded-lg p-4 m-2 w-full max-w-sm">
       <div className="flex justify-center ">
