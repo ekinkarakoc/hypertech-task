@@ -18,9 +18,7 @@ const cardSlice = createSlice({
     },
     toggleCardItem: (state, action) => {
       const itemId = action.payload;
-      const item = state.cardItems.find(
-        (item) => item.productCategoryID === itemId
-      );
+      const item = state.cardItems.find((item) => item.productID === itemId);
 
       if (item) {
         item.selected = !item.selected;

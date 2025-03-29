@@ -72,3 +72,15 @@
 19 -> Sepete ekli olan ürün sayısı(quantity)' na useSelector kullanılarak Navbar.jsx componenti içerisinden erişildi ve Sepet iconunun sağ üst tarafında olacak şekilde konumlandırıldı.
 
 20 -> Responsive yapı için flexbox kullanıldı, index.html içerisinden title ve favicon değiştirildi ve proje tamamlandı.
+
+# ISTEGE BAGLI BOLUM
+
+21 -> Gönderilen api tekrar kontrol edildi, https://api.hyperteknoloji.com.tr/Products/List api'ının çalışmaya başladığı tespit edildi ve axios.get metodu axios post ile bu endpointe yönlendirildi.
+
+22 -> Api isteği için oluşturulan fonksiyon güncellendi, alınan değerler değiştiği için propslar güncellendi ve sepete ekleme kısmının reducer fonksiyonu güncellendi.
+
+23 -> Favoriler ve Sepetim sayfasının yapımı için react-router-dom kütüphanesini indirdim. BrowserRouter ile uygulamamı sardıktan sonra App.jsx sayfası içerisinde Navbar altında routing işlemlerimi gerçekleştirdim.
+
+24 -> Navbar sayfasında sepet iconunu link ile sarmalayarak "my-products" yolunu verdim bu şekilde routing işlemimi tamamladım, ana sayfaya tekrar dönülmesi için ise Hyper Teknoloji resmine "/" yolunu verdim.
+
+25 -> Sepet içeriğinin gözükeceği MyProducts.jsx componentini oluşturdum ve içerisine ana sayfada seçili olan ürünleri sıraladım. Daha sonra sayfanın stillendirmesini yaptım.

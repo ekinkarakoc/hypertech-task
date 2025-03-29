@@ -2,22 +2,21 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCardItem } from "../control/cardSlice";
 
-const CardItem = ({ title, price, image, productCategoryID }) => {
+const CardItem = ({ title, price, image, productID }) => {
   const dispatch = useDispatch();
 
   const selected = useSelector(
     (state) =>
-      state.card.cardItems.find(
-        (item) => item.productCategoryID === productCategoryID
-      )?.selected
+      state.card.cardItems.find((item) => item.productID === productID)
+        ?.selected
   );
 
   const handleToggle = () => {
-    dispatch(toggleCardItem(productCategoryID));
+    dispatch(toggleCardItem(productID));
   };
 
   return (
-    <div className="bg-white flex flex-col justify-between shadow-md h-80 rounded-lg p-4 m-2 w-full max-w-sm">
+    <div className="bg-white flex flex-col justify-between shadow-md h-82 rounded-lg p-4 m-2 w-full max-w-sm">
       <div className="flex justify-center h-30 ">
         <h2 className="text-lg font-semibold text-center w-70">{title}</h2>
       </div>
@@ -27,7 +26,7 @@ const CardItem = ({ title, price, image, productCategoryID }) => {
       <div className="w-full flex justify-center mt-4">
         <button
           onClick={handleToggle}
-          className={`flex items-center justify-between w-50 px-4 py-2 border gap-2 rounded-2xl hover:cursor-pointer border-gray-400 
+          className={`flex flex-col items-center justify-between w-50 px-4 py-2 border rounded-2xl hover:cursor-pointer border-gray-400 
                    hover:bg-gray-100 hover:scale-105 transition duration-300 
                    ${
                      selected
