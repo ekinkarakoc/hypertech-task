@@ -11,10 +11,17 @@ const cardSlice = createSlice({
   initialState,
   reducers: {
     setCardItems: (state, action) => {
-      state.cardItems = action.payload.map((item) => ({
-        ...item,
-        selected: false,
-      }));
+      const newItems = action.payload;
+
+      state.cardItems = newItems.map((newItem) => {
+        const existing = state.cardItems.find(
+          (item) => item.productID === newItem.productID
+        );
+        return {
+          ...newItem,
+          selected: existing ? existing.selected : false,
+        };
+      });
     },
     toggleCardItem: (state, action) => {
       const itemId = action.payload;

@@ -25,7 +25,6 @@ const Content = () => {
           }
         );
         const products = response.data.data;
-        console.log(products);
         dispatch(setCardItems(products));
       } catch (error) {
         console.error("API Hatası:", error.response?.data || error.message);
