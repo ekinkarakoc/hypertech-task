@@ -32,9 +32,17 @@ const cardSlice = createSlice({
         state.quantity += item.selected ? 1 : -1;
       }
     },
+    clearSelectedItems: (state) => {
+      state.cardItems = state.cardItems.map((item) => ({
+        ...item,
+        selected: false,
+      }));
+      state.quantity = 0;
+    },
   },
 });
 
-export const { setCardItems, toggleCardItem } = cardSlice.actions;
+export const { setCardItems, toggleCardItem, clearSelectedItems } =
+  cardSlice.actions;
 
 export default cardSlice.reducer;
